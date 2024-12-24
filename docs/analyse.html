@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyse des Données – Analyse d’Innovation des Entreprises</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
+<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="site_libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+
+
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse d’Innovation des Entreprises</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./statistiques.html"> 
+<span class="menu-text">Statistiques Descriptives</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./analyse.html" aria-current="page"> 
+<span class="menu-text">Analyse des Données</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyse des Données</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Dans cette section, nous nous intéressons à l’exploration des liens entre l’innovation des entreprises et la demande de compétences spécifiques.</strong></p>
+<p>En utilisant la base <strong>base_emp_inno.csv</strong>, qui regroupe des informations sur les entreprises déposant des brevets et publiant des offres d’emploi, nous analyserons comment ces deux facteurs interagissent. Cette analyse vise à mettre en évidence les tendances et les relations entre les efforts d’innovation des entreprises et les compétences qu’elles recherchent, offrant ainsi une vue d’ensemble des dynamiques entre l’innovation technologique et le marché de l’emploi.</p>
+<section id="graphiques-bivariés" class="level2">
+<h2 class="anchored" data-anchor-id="graphiques-bivariés">1.Graphiques bivariés:</h2>
+<section id="codes-ipc-par-secteur" class="level3">
+<h3 class="anchored" data-anchor-id="codes-ipc-par-secteur">1.1 Codes IPC par Secteur</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Ce graphique présente la distribution des brevets</strong> (représentés par le nombre total de brevets, n_patents) <strong>dans différents secteurs d’activité, regroupés par code IPC principal, avec chaque segment de couleur représentant un code IPC spécifique.</strong></p>
+<p>On peut observer que le secteur des <strong>technologies de pointe</strong> (high-tech) est particulièrement actif en matière de dépôt de brevets, avec une barre nettement plus haute par rapport aux autres secteurs, suivi du secteur <strong>biotechnologique</strong> et, enfin, du secteur <strong>aérospatial</strong>. Ces résultats mettent en lumière l’intensité de l’innovation dans ces secteurs clés.</p>
+<p>Le graphique permet également de visualiser la <strong>diversité des innovations</strong> dans chaque secteur. Il est évident que les secteurs des <strong>technologies de pointe</strong>, de l’<strong>aérospatial</strong>, des <strong>communications</strong> et de l’<strong>environnement</strong> sont particulièrement diversifiés en termes de types de brevets déposés, avec des segments variés représentant différents codes IPC. Cette diversité peut refléter une approche multidimensionnelle de l’innovation dans ces secteurs.</p>
+<p>L’analyse des proportions des couleurs dans chaque barre permet de déterminer quel <strong>code IPC</strong> domine dans chaque secteur. Par exemple, dans le secteur des <strong>technologies de pointe</strong>, le code IPC <strong>H04L</strong> (communications numériques) est le prédominant, tandis que dans le secteur <strong>biotechnologique</strong>, le code <strong>A61M</strong> (dispositifs médicaux) domine.</p>
+<p>Cela suggère que l’innovation dans ces secteurs se concentre principalement sur un aspect technologique particulier, tel que les technologies de communication dans le secteur high-tech ou les dispositifs médicaux dans la biotechnologie.</p>
+</section>
+<section id="nombre-moyen-doffres-par-secteur" class="level3">
+<h3 class="anchored" data-anchor-id="nombre-moyen-doffres-par-secteur">1.2 Nombre moyen d’offres par secteur</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le graphique illustre le <strong>nombre moyen d’offres par secteur</strong>, avec l’<strong>Aérospatial</strong> en tête, affichant une barre longue indiquant un nombre élevé d’offres estimé à 12. Ce secteur est suivi par l’<strong>Industrie pétrolière</strong>, qui, bien que plus courte avec un nombre moyen d’offres de 8, reste significative, suivi de l’<strong>Industrie agroalimentaire</strong> et <strong>Commerce de gros</strong> de meme longueur (nombre moyen d’offres de 5) . Les quatres premiers secteurs (<strong>Aérospatial</strong>, <strong>Industrie pétrolière</strong> , <strong>Agroalimentaire</strong> et <strong>Commerce de gros</strong> ) sont tous représentés en <strong>jaune</strong>, suggérant une moyenne des brevets autour de 200. La <strong>Biotechnologie</strong>, avec une barre comparable à celles de l’agroalimentaire et du commerce de gros, se distingue par une <strong>couleur rouge plus intense</strong>, indiquant une forte concentration de brevets. Enfin, l’<strong>Industrie High Tech</strong>, bien que dotée d’une barre relativement courte (nombre moyen d’offres de 3), se distingue par sa <strong>couleur orangée</strong>, ce qui montre une moyenne d’offres plus faible mais une intensité d’innovation (brevets) plus importante que certains secteurs avec des barres plus longues. Ce graphique met en évidence les variations entre le <strong>nombre d’offres d’emploi</strong> et le niveau d’<strong>innovation</strong> au sein de chaque secteur</p>
+</section>
+<section id="innovation-et-demande-de-compétences" class="level3">
+<h3 class="anchored" data-anchor-id="innovation-et-demande-de-compétences">1.3 Innovation et demande de compétences</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le graphique <strong>“Innovation et Demande de Compétences”</strong> met en lumière la relation entre le nombre de <strong>brevets déposés</strong> et le <strong>nombre d’offres d’emploi</strong> dans différents secteurs. <strong>La Biotechnologie</strong> se distingue par une <strong>innovation élevée</strong> (plus de 800 brevets) et un <strong>nombre modéré d’offres</strong> (environ 7), représentée en <strong>orange</strong>. Cela suggère une forte activité d’innovation, mais une demande de compétences relativement stable.</p>
+<p>En comparaison, l’<strong>Industrie High-Tech</strong>, avec environ 450 brevets, a un <strong>nombre d’offres plus faible</strong> (2 offres), représentée en <strong>jaune</strong>, ce qui pourrait indiquer un marché plus restreint pour ces compétences.</p>
+<p>Enfin, l’<strong>Aérospatial</strong>, avec une moyenne de moins de 100 brevets, présente une <strong>forte demande</strong> en compétences (plus de 12 offres), indiquée par la couleur <strong>rouge vif</strong>, ce qui montre que malgré une <strong>innovation modeste</strong>, la demande de compétences dans ce secteur est particulièrement élevée.</p>
+<p>Ce graphique souligne ainsi l’impact de l’innovation sur la demande de compétences, selon les secteurs.</p>
+</section>
+<section id="nombre-de-brevets-vs-nombre-doffres-par-ville" class="level3">
+<h3 class="anchored" data-anchor-id="nombre-de-brevets-vs-nombre-doffres-par-ville">1.4 Nombre de brevets vs Nombre d’offres par ville</h3>
+<section id="instruction-double-cliquer-sur-une-comptences-pour-voir-le-graphe-unique-de-celle-ci" class="level5">
+<h5 class="anchored" data-anchor-id="instruction-double-cliquer-sur-une-comptences-pour-voir-le-graphe-unique-de-celle-ci">Instruction : double cliquer sur une comptences pour voir le graphe unique de celle ci</h5>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-256126c90acb527df51b" style="width:100%;height:541px;"></div>
+<script type="application/json" data-for="htmlwidget-256126c90acb527df51b">{"x":{"data":[{"x":[1,4],"y":[1,1],"text":["Ville:   <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","Ville:   <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","legendgroup":"","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[1],"text":"Ville:  Ancenis <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(241,125,80,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(241,125,80,1)"}},"hoveron":"points","name":"Ancenis","legendgroup":"Ancenis","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[21],"y":[1],"text":"Ville:  Benfeld <br> Nombre de Brevets:  21 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(232,133,38,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(232,133,38,1)"}},"hoveron":"points","name":"Benfeld","legendgroup":"Benfeld","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172],"y":[5],"text":"Ville:  Blagnac <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(222,140,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(222,140,0,1)"}},"hoveron":"points","name":"Blagnac","legendgroup":"Blagnac","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2],"y":[2],"text":"Ville:  Bouguenais <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(211,146,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(211,146,0,1)"}},"hoveron":"points","name":"Bouguenais","legendgroup":"Bouguenais","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3,16,27],"y":[21,1,1],"text":["Ville:  Boulogne Billancourt <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Ville:  Boulogne Billancourt <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  1","Ville:  Boulogne Billancourt <br> Nombre de Brevets:  27 <br> Nombre d'Offres:  1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(198,153,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(198,153,0,1)"}},"hoveron":"points","name":"Boulogne Billancourt","legendgroup":"Boulogne Billancourt","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[76],"y":[1],"text":"Ville:  Carquefou <br> Nombre de Brevets:  76 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(183,159,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(183,159,0,1)"}},"hoveron":"points","name":"Carquefou","legendgroup":"Carquefou","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[77],"y":[1],"text":"Ville:  Cluses <br> Nombre de Brevets:  77 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(166,164,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(166,164,0,1)"}},"hoveron":"points","name":"Cluses","legendgroup":"Cluses","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[61,1638],"y":[10,6],"text":["Ville:  Courbevoie <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Ville:  Courbevoie <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(147,170,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(147,170,0,1)"}},"hoveron":"points","name":"Courbevoie","legendgroup":"Courbevoie","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[9,7],"y":[1,3],"text":["Ville:  Guyancourt <br> Nombre de Brevets:  9 <br> Nombre d'Offres:  1","Ville:  Guyancourt <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(124,174,0,1)"}},"hoveron":"points","name":"Guyancourt","legendgroup":"Guyancourt","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,38],"y":[44,4],"text":["Ville:  Issy les Moulineaux <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Ville:  Issy les Moulineaux <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(94,179,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(94,179,0,1)"}},"hoveron":"points","name":"Issy les Moulineaux","legendgroup":"Issy les Moulineaux","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[8],"text":"Ville:  Jouy en Josas <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(43,182,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(43,182,0,1)"}},"hoveron":"points","name":"Jouy en Josas","legendgroup":"Jouy en Josas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2],"y":[1],"text":"Ville:  La Ferriere <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"La Ferriere","legendgroup":"La Ferriere","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[1],"text":"Ville:  La Loyere <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,188,90,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,188,90,1)"}},"hoveron":"points","name":"La Loyere","legendgroup":"La Loyere","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3],"y":[3],"text":"Ville:  Le Chesnay <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,116,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,116,1)"}},"hoveron":"points","name":"Le Chesnay","legendgroup":"Le Chesnay","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[70],"y":[1],"text":"Ville:  Le Plessis Robinson <br> Nombre de Brevets:  70 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,139,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,139,1)"}},"hoveron":"points","name":"Le Plessis Robinson","legendgroup":"Le Plessis Robinson","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3],"y":[1],"text":"Ville:  Lyon <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,193,159,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,193,159,1)"}},"hoveron":"points","name":"Lyon","legendgroup":"Lyon","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4],"y":[1],"text":"Ville:  Magny Vernois <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,179,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,179,1)"}},"hoveron":"points","name":"Magny Vernois","legendgroup":"Magny Vernois","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[442],"y":[3],"text":"Ville:  Marignane <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Marignane","legendgroup":"Marignane","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[171],"y":[2],"text":"Ville:  Metz Tessy <br> Nombre de Brevets:  171 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,189,213,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,189,213,1)"}},"hoveron":"points","name":"Metz Tessy","legendgroup":"Metz Tessy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,1,113],"y":[2,1,1],"text":["Ville:  Montpellier <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Ville:  Montpellier <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","Ville:  Montpellier <br> Nombre de Brevets:  113 <br> Nombre d'Offres:  1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,185,227,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,185,227,1)"}},"hoveron":"points","name":"Montpellier","legendgroup":"Montpellier","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[1],"text":"Ville:  Montreuil <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,180,240,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,180,240,1)"}},"hoveron":"points","name":"Montreuil","legendgroup":"Montreuil","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[2],"text":"Ville:  Montrouge <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,173,250,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,173,250,1)"}},"hoveron":"points","name":"Montrouge","legendgroup":"Montrouge","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[76],"y":[1],"text":"Ville:  Nantes <br> Nombre de Brevets:  76 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,165,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,165,255,1)"}},"hoveron":"points","name":"Nantes","legendgroup":"Nantes","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[28],"y":[6],"text":"Ville:  Neuilly sur Seine <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"Neuilly sur Seine","legendgroup":"Neuilly sur Seine","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7],"y":[5],"text":"Ville:  Orleans <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(142,146,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(142,146,255,1)"}},"hoveron":"points","name":"Orleans","legendgroup":"Orleans","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2],"y":[1],"text":"Ville:  Orsay <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(174,135,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(174,135,255,1)"}},"hoveron":"points","name":"Orsay","legendgroup":"Orsay","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,1,12,28,23,4,1,53,1,8,5,1,3,1,1,1262,13,129,820],"y":[2,1,3,5,2,2,5,1,5,1,1,4,1,1,1,3,9,23,7],"text":["Ville:  Paris <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Ville:  Paris <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Ville:  Paris <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Ville:  Paris <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  2","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Ville:  Paris <br> Nombre de Brevets:  53 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Ville:  Paris <br> Nombre de Brevets:  8 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  5 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Ville:  Paris <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  1","Ville:  Paris <br> Nombre de Brevets:  1262 <br> Nombre d'Offres:  3","Ville:  Paris <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Ville:  Paris <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Ville:  Paris <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(199,124,255,1)"}},"hoveron":"points","name":"Paris","legendgroup":"Paris","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[4],"text":"Ville:  Pontoise <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(219,114,251,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(219,114,251,1)"}},"hoveron":"points","name":"Pontoise","legendgroup":"Pontoise","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6],"y":[3],"text":"Ville:  Rueil Malmaison <br> Nombre de Brevets:  6 <br> Nombre d'Offres:  3","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(234,106,241,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(234,106,241,1)"}},"hoveron":"points","name":"Rueil Malmaison","legendgroup":"Rueil Malmaison","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2],"y":[1],"text":"Ville:  Saint Andre lez Lille <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(245,100,227,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(245,100,227,1)"}},"hoveron":"points","name":"Saint Andre lez Lille","legendgroup":"Saint Andre lez Lille","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[2],"text":"Ville:  Saint Cloud <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(252,97,212,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(252,97,212,1)"}},"hoveron":"points","name":"Saint Cloud","legendgroup":"Saint Cloud","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[2],"text":"Ville:  Strasbourg <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,97,195,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,97,195,1)"}},"hoveron":"points","name":"Strasbourg","legendgroup":"Strasbourg","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[17,38],"y":[1,2],"text":["Ville:  Toulouse <br> Nombre de Brevets:  17 <br> Nombre d'Offres:  1","Ville:  Toulouse <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  2"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,100,176,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,100,176,1)"}},"hoveron":"points","name":"Toulouse","legendgroup":"Toulouse","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[239],"y":[11],"text":"Ville:  Velizy Villacoublay <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,105,156,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,105,156,1)"}},"hoveron":"points","name":"Velizy Villacoublay","legendgroup":"Velizy Villacoublay","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[40],"y":[1],"text":"Ville:  Villeurbanne <br> Nombre de Brevets:  40 <br> Nombre d'Offres:  1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(253,111,134,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(253,111,134,1)"}},"hoveron":"points","name":"Villeurbanne","legendgroup":"Villeurbanne","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":42.301369863013697,"r":7.3059360730593621,"b":38.721461187214615,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":"Relation entre Nombre de Brevets et Nombre d'Offres par Ville","xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-80.850000000000009,1719.8499999999999],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,500,999.99999999999989,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":"Nombre de Brevets","hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.1499999999999999,46.149999999999999],"tickmode":"array","ticktext":["0","10","20","30","40"],"tickvals":[0,10,20,30,40],"categoryorder":"array","categoryarray":["0","10","20","30","40"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":"Nombre d'Offres","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Ville","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"orientation":"h","x":0.5,"xanchor":"center","y":-0.5},"hovermode":"x unified","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d3212c98ee0f":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"d3212c98ee0f","visdat":{"d3212c98ee0f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Le graphique <strong>Nuage de points : Nombre de brevets vs Nombre d’offres par villes</strong> montre la relation entre <strong>le nombre de brevets</strong> et <strong>le nombre d’offres d’emploi</strong> pour chaque villes. Une observation notable est que certaines villes affichent des profils très différents en matière d’innovation et d’emploi. Par exemple, la ville d’Issy les Moulineaux présente un grand nombre d’offres d’emploi, mais relativement peu de brevets, ce qui suggère un dynamisme économique en termes de recrutement, mais peut-être moins d’innovation technologique. En revanche, des villes comme Courbevoie et Paris montrent une situation inverse, avec un nombre élevé de brevets mais moins d’offres d’emploi, ce qui pourrait indiquer une forte activité en matière de recherche et développement, mais une moindre demande d’embauche. La majorité des villes se regroupent dans une zone du graphique où le nombre d’offres d’emploi est autour de <strong>10</strong> et le nombre de brevets avoisine <strong>250</strong>, indiquant un modèle assez homogène de dynamisme innovant et économique dans ces régions.</p>
+</section>
+</section>
+<section id="code-principal-ipc-en-fonction-du-nombre-de-brevet" class="level3">
+<h3 class="anchored" data-anchor-id="code-principal-ipc-en-fonction-du-nombre-de-brevet">1.5 Code principal IPC en fonction du nombre de brevet :</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ce graphique illustre <strong>la répartition du nombre de brevets par code principal IPC</strong> (International Patent Classification). Chaque barre représente un code IPC spécifique, et sa hauteur correspond au nombre total de brevets associés à ce domaine d’innovation.</p>
+<p>On observe que le code <strong>G01S</strong>, lié aux technologies de mesure et de contrôle, se distingue avec plus de 1500 brevets, suivi de près par le code <strong>H04</strong>L, associé aux technologies de communication, qui affiche presque 1300 brevets. Le code <strong>A61K</strong>, relatif aux préparations pharmaceutiques, arrive en troisième position avec environ 600 brevets. Ces résultats montrent que les domaines liés aux technologies de mesure et aux communications sont les plus prolifiques en termes d’innovation brevetée.</p>
+<p>Les couleurs des barres varient en intensité, allant d’un rose clair pour les codes IPC avec moins de brevets à un rouge intense pour ceux avec un grand nombre de brevets. Cette palette de couleurs permet de visualiser facilement les secteurs les plus innovants. Les barres les plus rouges, représentant les codes IPC ayant les valeurs les plus élevées, signalent les domaines d’innovation les plus actifs, ce qui pourrait être un indicateur des secteurs économiques à fort potentiel de développement technologique</p>
+</section>
+<section id="nombres-doffre-en-fonction-du-secteur-principal" class="level3">
+<h3 class="anchored" data-anchor-id="nombres-doffre-en-fonction-du-secteur-principal">1.6 Nombres d’offre en fonction du secteur principal</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ce graphique met en évidence <strong>la répartition du nombre d’offres d’emploi selon les secteurs principaux</strong>. Chaque boîte (boxplot) représente un secteur et illustre la dispersion du nombre d’offres autour de la médiane, tout en mettant en évidence les éventuelles valeurs extrêmes.</p>
+<p>Le secteur <strong>Aéronautique</strong> se distingue par une forte variabilité, avec un nombre d’offres élevé et une dispersion importante, traduisant une dynamique de recrutement diversifiée. À l’inverse, des secteurs comme <strong>Assurance</strong>, <strong>Biotechnologie</strong>, ou <strong>BTP</strong> présentent une faible variabilité, indiquant une homogénéité dans les opportunités d’emploi. Un point remarquable est observé dans le secteur <strong>Commerce de gros</strong>, où une valeur extrême (outlier) témoigne d’un département ou d’une entreprise avec un nombre exceptionnel d’offres.</p>
+<p>Les secteurs technologiques et industriels, tels que <strong>l’Industrie high-tech </strong>et <strong>l’Industrie automobile</strong>, affichent également des volumes d’offres significatifs, reflétant leur rôle clé dans l’économie. En revanche, les secteurs comme le <strong>Service public des collectivités territoriales </strong> semblent moins actifs en termes de recrutement.</p>
+</section>
+</section>
+<section id="estimations-économétriques-simples" class="level2">
+<h2 class="anchored" data-anchor-id="estimations-économétriques-simples">2.Estimations économétriques simples</h2>
+<section id="expérience-moyenne-requise-en-année-en-fonction-du-nombre-de-brevets" class="level3">
+<h3 class="anchored" data-anchor-id="expérience-moyenne-requise-en-année-en-fonction-du-nombre-de-brevets">2.1 Expérience moyenne requise (en année en fonction du nombre de brevets)</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ce graphique illustre <strong>la relation entre l’expérience moyenne requise pour les offres d’emploi et le nombre de brevets déposés</strong>. Chaque point violet représente un secteur ou un département, positionné selon l’expérience moyenne demandée (en années) et le nombre de brevets associés.</p>
+<p>On observe que la majorité des points se concentre à proximité de 0 année d’expérience, ce qui reflète que la plupart des offres d’emploi nécessitent peu ou pas d’expérience préalable. Quelques cas isolés montrent un nombre très élevé de brevets, bien que ces cas soient rares et atypiques.</p>
+<p>La ligne orange, représentant la tendance générale issue d’une régression linéaire, est presque horizontale. Cela indique qu’il n’y a pas de lien significatif entre l’expérience moyenne requise et le nombre de brevets déposés. La grande zone grisée autour de cette ligne illustre une forte incertitude, due en partie à une variabilité élevée et à l’influence de points extrêmes.</p>
+</section>
+</section>
+<section id="word-cloud-des-compétences-pondérées" class="level2">
+<h2 class="anchored" data-anchor-id="word-cloud-des-compétences-pondérées">3.Word Cloud des compétences pondérées :</h2>
+<section id="nuage-de-mots-des-compétences-pondéré-par-salaire" class="level3">
+<h3 class="anchored" data-anchor-id="nuage-de-mots-des-compétences-pondéré-par-salaire">3.1 Nuage de mots des compétences pondéré par salaire</h3>
+<div class="cell">
+<div class="cell-output-display">
+
+
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-7dfae504a0a4df8b51bf" style="width:100%;height:338px;"></div>
+<script type="application/json" data-for="htmlwidget-7dfae504a0a4df8b51bf">{"x":{"word":["anglais","apprentissage profond","artificial intelligence","attention aux détails","autonome","aws","azure","base de donnée","c++","collaboration en équipe","collecte de données","communication","compétences en présentation","contrôle de version","créativité","curiosité","data collection","database","excel","forecasting","français","gestion de projets","gestion du temps","git","google cloud","intelligence artificielle","matplotlib","modélisation","nettoyage de donnée","nlp","optimisation","plotly","power bi","proactif","programmation","prévision","python","pytorch","r studio","rapport","reporting","rigueur","résolution de problèmes","spark","sql","statistique","tableau","team player","tensorflow","traitement du langage naturel","vba","visualisation de donnée","équipe"],"freq":[19,9,2,2,7,4,5,5,2,13,2,22,1,1,1,10,1,4,18,1,10,5,1,16,2,5,1,6,1,2,12,2,5,4,13,6,22,2,1,6,6,8,2,7,12,19,8,2,2,1,1,3,28],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-light","minSize":10,"weightFactor":5.142857142857143,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+
+
+</div>
+</div>
+<p>Le <strong>nuage de mots des compétences pondéré par salaire</strong> met en évidence les compétences les plus demandées et les mieux rémunérées. Parmi les <strong>compétences linguistiques</strong>, l’<strong>Anglais</strong> (136) se distingue comme la plus valorisée, soulignant son importance dans des rôles à forte responsabilité. En termes de <strong>programmation</strong>, des compétences comme <strong>SQL</strong> (162) et <strong>Git</strong> (141) ressortent, indiquant qu’elles sont essentielles dans les métiers techniques et bien rémunérées. Les <strong>compétences en modélisation</strong> (86) suivent également de près. Concernant les outils et logiciels, des compétences telles que <strong>Excel</strong> (112) et <strong>Tableau</strong> (89) sont très recherchées, notamment dans les secteurs de l’analyse de données et de la gestion. Enfin, la compétence <strong>Base de données</strong> (86) démontre l’importance de l’expertise en gestion et analyse de données. Ces résultats soulignent les compétences clés dans le monde professionnel, celles qui apportent à la fois une forte demande et des salaires élevés.</p>
+</section>
+<section id="nuage-de-mots-des-compétences-pondéré-par-nombre-de-brevets" class="level3">
+<h3 class="anchored" data-anchor-id="nuage-de-mots-des-compétences-pondéré-par-nombre-de-brevets">3.2 Nuage de mots des compétences pondéré par nombre de brevets</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analyse_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le <strong>nuage de mots des compétences pondéré par brevet</strong> montre les compétences les plus présentes dans les entreprises innovantes. Parmi les <strong>compétences linguistiques</strong>, l’<strong>Anglais</strong> (136) apparaît comme une compétence clé, soulignant son rôle crucial dans les projets internationaux et les collaborations à l’échelle mondiale.</p>
+<p>En <strong>programmation</strong>, <strong>Python</strong> (185) se distingue comme la compétence la plus valorisée, illustrant son importance dans les domaines technologiques et d’innovation.</p>
+<p>Les <strong>compétences en collaboration</strong> (120) ressortent également, montrant que l’innovation est souvent le fruit du travail d’équipe.</p>
+<p>Les compétences en <strong>statistiques</strong> (126) et en <strong>modélisation</strong> (86) sont primordiales pour analyser et développer des solutions techniques.</p>
+<p>Enfin, des compétences comme <strong>communication</strong> (93) et <strong>Tableau</strong> (89) soulignent l’importance de la diffusion des résultats et de l’analyse des données dans les projets d’innovation brevetés.</p>
+</section>
+</section>
+<section id="graphique-pour-les-compétences" class="level2">
+<h2 class="anchored" data-anchor-id="graphique-pour-les-compétences">4.Graphique pour les compétences</h2>
+<section id="instruction-double-cliquer-sur-une-comptences-pour-voir-le-graphe-unique-de-celle-ci-1" class="level5">
+<h5 class="anchored" data-anchor-id="instruction-double-cliquer-sur-une-comptences-pour-voir-le-graphe-unique-de-celle-ci-1">Instruction : double cliquer sur une comptences pour voir le graphe unique de celle ci</h5>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-bc2780d0275f63061845" style="width:100%;height:650px;"></div>
+<script type="application/json" data-for="htmlwidget-bc2780d0275f63061845">{"x":{"data":[{"x":[1,172,442,7,3,23,1,239,61,1,1,13,129,171,820,7,1,1,38],"y":[8,5,3,5,21,2,5,11,10,2,2,9,23,2,7,3,44,4,4],"text":["Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Anglais <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Anglais <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Anglais <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Anglais <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Anglais <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Anglais <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Anglais <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Anglais <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Anglais <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Anglais <br> Nombre de Brevets:  171 <br> Nombre d'Offres:  2","Compétence:  Anglais <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Anglais <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Compétence:  Anglais <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Anglais <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Anglais","legendgroup":"Anglais","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,7,239,1,13,1,129,7,38],"y":[8,5,11,2,9,2,23,3,4],"text":["Compétence:  Apprentissage profond <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Apprentissage profond <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Apprentissage profond <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Apprentissage profond <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Apprentissage profond <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Apprentissage profond <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Apprentissage profond <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Apprentissage profond <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Apprentissage profond <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(243,123,90,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(243,123,90,1)"}},"hoveron":"points","name":"Apprentissage profond","legendgroup":"Apprentissage profond","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,820],"y":[2,7],"text":["Compétence:  Artificial intelligence <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Artificial intelligence <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(238,128,68,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(238,128,68,1)"}},"hoveron":"points","name":"Artificial intelligence","legendgroup":"Artificial intelligence","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13,820],"y":[9,7],"text":["Compétence:  Attention aux Détails <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Attention aux Détails <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(232,133,36,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(232,133,36,1)"}},"hoveron":"points","name":"Attention aux Détails","legendgroup":"Attention aux Détails","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3,61,28,13,171,7,1],"y":[21,10,6,9,2,3,44],"text":["Compétence:  Autonome <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Autonome <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Autonome <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","Compétence:  Autonome <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Autonome <br> Nombre de Brevets:  171 <br> Nombre d'Offres:  2","Compétence:  Autonome <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Autonome <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(225,138,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(225,138,0,1)"}},"hoveron":"points","name":"Autonome","legendgroup":"Autonome","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,61,129,820],"y":[8,10,23,7],"text":["Compétence:  AWS <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  AWS <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  AWS <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  AWS <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(218,142,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(218,142,0,1)"}},"hoveron":"points","name":"AWS","legendgroup":"AWS","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,13,820,7],"y":[8,5,9,7,3],"text":["Compétence:  Azure <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Azure <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Azure <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Azure <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Azure <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(210,147,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(210,147,0,1)"}},"hoveron":"points","name":"Azure","legendgroup":"Azure","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3,239,61,129,1638],"y":[21,11,10,23,6],"text":["Compétence:  Base de donnée <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Base de donnée <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Base de donnée <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Base de donnée <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Base de donnée <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(201,151,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(201,151,0,1)"}},"hoveron":"points","name":"Base de donnée","legendgroup":"Base de donnée","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[239,1],"y":[11,2],"text":["Compétence:  C++ <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  C++ <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(192,155,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(192,155,0,1)"}},"hoveron":"points","name":"C++","legendgroup":"C++","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3,1,239,1,61,1,3,28,13,820,1638,1,6],"y":[21,5,11,5,10,4,3,6,9,7,6,4,3],"text":["Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Collaboration en Équipe <br> Nombre de Brevets:  6 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(181,159,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(181,159,0,1)"}},"hoveron":"points","name":"Collaboration en Équipe","legendgroup":"Collaboration en Équipe","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[28,129],"y":[6,23],"text":["Compétence:  collecte de données <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","Compétence:  collecte de données <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(170,163,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(170,163,0,1)"}},"hoveron":"points","name":"collecte de données","legendgroup":"collecte de données","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,12,28,7,3,23,4,1,239,61,1,1,1,13,1,129,820,1,1638,38],"y":[8,5,3,3,5,5,21,2,2,5,11,10,4,2,2,9,2,23,7,44,6,4],"text":["Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Communication <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Communication <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Communication <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Communication <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  Communication <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Communication <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Communication <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Communication <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  2","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Communication <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Communication <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Communication <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Communication <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Communication <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Communication <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Compétence:  Communication <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Communication <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(158,167,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(158,167,0,1)"}},"hoveron":"points","name":"Communication","legendgroup":"Communication","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[820],"y":[7],"text":"Compétence:  Compétences en Présentation <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(144,170,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(144,170,0,1)"}},"hoveron":"points","name":"Compétences en Présentation","legendgroup":"Compétences en Présentation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[23],"y":[2],"text":"Compétence:  Contrôle de version <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(128,173,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(128,173,0,1)"}},"hoveron":"points","name":"Contrôle de version","legendgroup":"Contrôle de version","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172],"y":[5],"text":"Compétence:  Créativité <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(109,177,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(109,177,0,1)"}},"hoveron":"points","name":"Créativité","legendgroup":"Créativité","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,12,28,7,3,61,13,129,1,38],"y":[8,3,5,5,21,10,9,23,44,4],"text":["Compétence:  Curiosité <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Curiosité <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Curiosité <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  Curiosité <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Curiosité <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Curiosité <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Curiosité <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Curiosité <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Curiosité <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Compétence:  Curiosité <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(87,179,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(87,179,0,1)"}},"hoveron":"points","name":"Curiosité","legendgroup":"Curiosité","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13],"y":[9],"text":"Compétence:  data collection <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(53,182,0,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(53,182,0,1)"}},"hoveron":"points","name":"data collection","legendgroup":"data collection","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,61,13,820],"y":[2,10,9,7],"text":["Compétence:  Database <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Compétence:  Database <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Database <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Database <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,184,33,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,184,33,1)"}},"hoveron":"points","name":"Database","legendgroup":"Database","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,12,28,7,3,23,1,239,1,61,1,3,2,28,1,38,1262,13,1,129,171,7,1638,1,6,38],"y":[8,5,3,3,5,5,21,2,5,11,5,10,4,3,2,6,2,2,3,9,2,23,2,3,6,4,3,4],"text":["Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  équipe <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  équipe <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  équipe <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  équipe <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  équipe <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  équipe <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  équipe <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  équipe <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  1262 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  équipe <br> Nombre de Brevets:  171 <br> Nombre d'Offres:  2","Compétence:  équipe <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  équipe <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  équipe <br> Nombre de Brevets:  6 <br> Nombre d'Offres:  3","Compétence:  équipe <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,65,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,65,1)"}},"hoveron":"points","name":"équipe","legendgroup":"équipe","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,1,172,3,4,1,239,61,1,3,1,13,1,129,171,820,1,1638],"y":[2,8,5,21,2,5,11,10,4,3,2,9,2,23,2,7,44,6],"text":["Compétence:  Excel <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Excel <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Excel <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Excel <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  2","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Excel <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Excel <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Excel <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Excel <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Excel <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Excel <br> Nombre de Brevets:  171 <br> Nombre d'Offres:  2","Compétence:  Excel <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Excel <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Compétence:  Excel <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,188,87,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,188,87,1)"}},"hoveron":"points","name":"Excel","legendgroup":"Excel","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[239],"y":[11],"text":"Compétence:  Forecasting <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,190,106,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,190,106,1)"}},"hoveron":"points","name":"Forecasting","legendgroup":"Forecasting","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,12,3,1,61,13,1,38],"y":[8,5,3,3,21,5,10,9,44,4],"text":["Compétence:  Français <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Français <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Français <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Français <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Français <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Français <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Français <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Français <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Français <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44","Compétence:  Français <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,122,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,122,1)"}},"hoveron":"points","name":"Français","legendgroup":"Français","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,3,23,239,13],"y":[5,21,2,11,9],"text":["Compétence:  Gestion de Projets <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Gestion de Projets <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Gestion de Projets <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Gestion de Projets <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Gestion de Projets <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,137,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,137,1)"}},"hoveron":"points","name":"Gestion de Projets","legendgroup":"Gestion de Projets","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[61],"y":[10],"text":"Compétence:  Gestion du Temps <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,152,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,152,1)"}},"hoveron":"points","name":"Gestion du Temps","legendgroup":"Gestion du Temps","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,28,7,3,23,1,239,61,3,38,13,129,820,1638],"y":[8,5,3,5,5,21,2,5,11,10,3,2,9,23,7,6],"text":["Compétence:  Git <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Git <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Git <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Git <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  Git <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Git <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Git <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Git <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Git <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Git <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Git <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Git <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  2","Compétence:  Git <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Git <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Git <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Git <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,193,165,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,193,165,1)"}},"hoveron":"points","name":"Git","legendgroup":"Git","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,3],"y":[5,21],"text":["Compétence:  Google Cloud <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Google Cloud <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,178,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,178,1)"}},"hoveron":"points","name":"Google Cloud","legendgroup":"Google Cloud","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,239,2,1638,6],"y":[8,11,2,6,3],"text":["Compétence:  Intelligence artificielle <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Intelligence artificielle <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Intelligence artificielle <br> Nombre de Brevets:  2 <br> Nombre d'Offres:  2","Compétence:  Intelligence artificielle <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Intelligence artificielle <br> Nombre de Brevets:  6 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,191,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,191,1)"}},"hoveron":"points","name":"Intelligence artificielle","legendgroup":"Intelligence artificielle","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[8],"text":"Compétence:  Matplotlib <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,190,202,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,190,202,1)"}},"hoveron":"points","name":"Matplotlib","legendgroup":"Matplotlib","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,3,23,239,129,7],"y":[5,21,2,11,23,3],"text":["Compétence:  modélisation <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  modélisation <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  modélisation <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  modélisation <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  modélisation <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  modélisation <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,189,213,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,189,213,1)"}},"hoveron":"points","name":"modélisation","legendgroup":"modélisation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[61],"y":[10],"text":"Compétence:  Nettoyage de donnée <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,223,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,223,1)"}},"hoveron":"points","name":"Nettoyage de donnée","legendgroup":"Nettoyage de donnée","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[129,7],"y":[23,3],"text":["Compétence:  NLP <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  NLP <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,183,232,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,183,232,1)"}},"hoveron":"points","name":"NLP","legendgroup":"NLP","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,1,7,3,239,61,1,38,13,129,820,7],"y":[2,8,5,21,11,10,4,2,9,23,7,3],"text":["Compétence:  Optimisation <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Compétence:  Optimisation <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Optimisation <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Optimisation <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Optimisation <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Optimisation <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Optimisation <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Optimisation <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  2","Compétence:  Optimisation <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Optimisation <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Optimisation <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Optimisation <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,179,241,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,179,241,1)"}},"hoveron":"points","name":"Optimisation","legendgroup":"Optimisation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[820,7],"y":[7,3],"text":["Compétence:  Plotly <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Plotly <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,175,248,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,175,248,1)"}},"hoveron":"points","name":"Plotly","legendgroup":"Plotly","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,239,129,820,1],"y":[8,11,23,7,44],"text":["Compétence:  Power BI <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Power BI <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Power BI <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Power BI <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Power BI <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,170,254,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,170,254,1)"}},"hoveron":"points","name":"Power BI","legendgroup":"Power BI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,28,7,3,61,129],"y":[5,5,5,21,10,23],"text":["Compétence:  Prévision <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Prévision <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  Prévision <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Prévision <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Prévision <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Prévision <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,164,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,164,255,1)"}},"hoveron":"points","name":"Prévision","legendgroup":"Prévision","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[239,61,820,1],"y":[11,10,7,44],"text":["Compétence:  Proactif <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Proactif <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Proactif <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Proactif <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  44"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(83,158,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(83,158,255,1)"}},"hoveron":"points","name":"Proactif","legendgroup":"Proactif","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,1,12,7,23,239,61,3,13,129,820,1638,38],"y":[2,8,3,5,2,11,10,3,9,23,7,6,4],"text":["Compétence:  Programmation <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Compétence:  Programmation <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Programmation <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Programmation <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Programmation <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Programmation <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Programmation <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Programmation <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Programmation <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Programmation <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Programmation <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Programmation <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Programmation <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(119,151,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(119,151,255,1)"}},"hoveron":"points","name":"Programmation","legendgroup":"Programmation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,12,28,7,3,23,4,1,239,1,61,3,1,13,1,129,820,7,1638,38],"y":[8,5,3,3,5,5,21,2,2,5,11,5,10,3,2,9,2,23,7,3,6,4],"text":["Compétence:  Python <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Python <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Python <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Python <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Python <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  Python <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Python <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Python <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Python <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  2","Compétence:  Python <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Python <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Python <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  Python <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Python <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Python <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Python <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Python <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Python <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Python <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Python <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Python <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Python <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(146,144,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(146,144,255,1)"}},"hoveron":"points","name":"Python","legendgroup":"Python","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,38],"y":[2,4],"text":["Compétence:  PyTorch <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  PyTorch <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(168,137,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(168,137,255,1)"}},"hoveron":"points","name":"PyTorch","legendgroup":"PyTorch","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3],"y":[21],"text":"Compétence:  R Studio <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(187,130,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(187,130,255,1)"}},"hoveron":"points","name":"R Studio","legendgroup":"R Studio","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,7,3,239,61,129],"y":[8,5,21,11,10,23],"text":["Compétence:  Rapport <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Rapport <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Rapport <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Rapport <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Rapport <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Rapport <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(203,122,255,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(203,122,255,1)"}},"hoveron":"points","name":"Rapport","legendgroup":"Rapport","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3,61,13,129,1638,6],"y":[21,10,9,23,6,3],"text":["Compétence:  Reporting <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Reporting <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Reporting <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Reporting <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Reporting <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Reporting <br> Nombre de Brevets:  6 <br> Nombre d'Offres:  3"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(216,116,252,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(216,116,252,1)"}},"hoveron":"points","name":"Reporting","legendgroup":"Reporting","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[61,1638],"y":[10,6],"text":["Compétence:  Résolution de Problèmes <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Résolution de Problèmes <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(227,109,246,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(227,109,246,1)"}},"hoveron":"points","name":"Résolution de Problèmes","legendgroup":"Résolution de Problèmes","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,3,239,61,129,7,1638,38],"y":[5,21,11,10,23,3,6,4],"text":["Compétence:  Rigueur <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Rigueur <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Rigueur <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Rigueur <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Rigueur <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Rigueur <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Rigueur <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Rigueur <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(236,104,238,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(236,104,238,1)"}},"hoveron":"points","name":"Rigueur","legendgroup":"Rigueur","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,3,61,13,820,7,1638],"y":[5,21,10,9,7,3,6],"text":["Compétence:  Spark <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Spark <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Spark <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Spark <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Spark <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  Spark <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Spark <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(244,100,229,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(244,100,229,1)"}},"hoveron":"points","name":"Spark","legendgroup":"Spark","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[16,172,28,3,239,1,61,13,129,820,7,1638],"y":[2,5,5,21,11,5,10,9,23,7,3,6],"text":["Compétence:  SQL <br> Nombre de Brevets:  16 <br> Nombre d'Offres:  2","Compétence:  SQL <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  SQL <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  5","Compétence:  SQL <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  SQL <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  SQL <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  5","Compétence:  SQL <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  SQL <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  SQL <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  SQL <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7","Compétence:  SQL <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  SQL <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(249,98,219,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(249,98,219,1)"}},"hoveron":"points","name":"SQL","legendgroup":"SQL","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,172,442,12,7,3,23,4,239,61,1,3,28,1,13,129,7,1638,1],"y":[8,5,3,3,5,21,2,2,11,10,4,3,6,2,9,23,3,6,4],"text":["Compétence:  Statistique <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  8","Compétence:  Statistique <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Statistique <br> Nombre de Brevets:  442 <br> Nombre d'Offres:  3","Compétence:  Statistique <br> Nombre de Brevets:  12 <br> Nombre d'Offres:  3","Compétence:  Statistique <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  5","Compétence:  Statistique <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Statistique <br> Nombre de Brevets:  23 <br> Nombre d'Offres:  2","Compétence:  Statistique <br> Nombre de Brevets:  4 <br> Nombre d'Offres:  2","Compétence:  Statistique <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Statistique <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Statistique <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","Compétence:  Statistique <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  3","Compétence:  Statistique <br> Nombre de Brevets:  28 <br> Nombre d'Offres:  6","Compétence:  Statistique <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Statistique <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Statistique <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Statistique <br> Nombre de Brevets:  7 <br> Nombre d'Offres:  3","Compétence:  Statistique <br> Nombre de Brevets:  1638 <br> Nombre d'Offres:  6","Compétence:  Statistique <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(253,97,208,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(253,97,208,1)"}},"hoveron":"points","name":"Statistique","legendgroup":"Statistique","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[172,3,239,1,1262,13,129,820],"y":[5,21,11,2,3,9,23,7],"text":["Compétence:  Tableau <br> Nombre de Brevets:  172 <br> Nombre d'Offres:  5","Compétence:  Tableau <br> Nombre de Brevets:  3 <br> Nombre d'Offres:  21","Compétence:  Tableau <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","Compétence:  Tableau <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  Tableau <br> Nombre de Brevets:  1262 <br> Nombre d'Offres:  3","Compétence:  Tableau <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Tableau <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Tableau <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,97,196,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,97,196,1)"}},"hoveron":"points","name":"Tableau","legendgroup":"Tableau","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13,820],"y":[9,7],"text":["Compétence:  Team Player <br> Nombre de Brevets:  13 <br> Nombre d'Offres:  9","Compétence:  Team Player <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,99,184,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,99,184,1)"}},"hoveron":"points","name":"Team Player","legendgroup":"Team Player","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,38],"y":[2,4],"text":["Compétence:  TensorFlow <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  2","Compétence:  TensorFlow <br> Nombre de Brevets:  38 <br> Nombre d'Offres:  4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,101,171,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,101,171,1)"}},"hoveron":"points","name":"TensorFlow","legendgroup":"TensorFlow","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[239],"y":[11],"text":"Compétence:  Traitement du Langage Naturel <br> Nombre de Brevets:  239 <br> Nombre d'Offres:  11","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,105,157,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,105,157,1)"}},"hoveron":"points","name":"Traitement du Langage Naturel","legendgroup":"Traitement du Langage Naturel","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[4],"text":"Compétence:  VBA <br> Nombre de Brevets:  1 <br> Nombre d'Offres:  4","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(254,109,142,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(254,109,142,1)"}},"hoveron":"points","name":"VBA","legendgroup":"VBA","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[61,129,820],"y":[10,23,7],"text":["Compétence:  Visualisation de donnée <br> Nombre de Brevets:  61 <br> Nombre d'Offres:  10","Compétence:  Visualisation de donnée <br> Nombre de Brevets:  129 <br> Nombre d'Offres:  23","Compétence:  Visualisation de donnée <br> Nombre de Brevets:  820 <br> Nombre d'Offres:  7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(252,113,126,1)","opacity":0.69999999999999996,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(252,113,126,1)"}},"hoveron":"points","name":"Visualisation de donnée","legendgroup":"Visualisation de donnée","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":"Relation entre Nombre de Brevets et Nombre d'Offres par Compétence","xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-80.850000000000009,1719.8499999999999],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,500,999.99999999999989,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":"Nombre de Brevets","hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.10000000000000009,46.100000000000001],"tickmode":"array","ticktext":["0","10","20","30","40"],"tickvals":[0,10,20,30,40],"categoryorder":"array","categoryarray":["0","10","20","30","40"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":"Nombre d'Offres","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Compétence","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"orientation":"h","x":0.5,"xanchor":"center","y":-0.5},"hovermode":"x unified","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d32147125b89":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"d32147125b89","visdat":{"d32147125b89":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Le graphe montre la relation entre <strong>le nombre d’offres d’emploi</strong> et de <strong>brevets déposés selon les compétences</strong> . Les compétences comme <strong>Curiosité</strong>, <strong>Français</strong>, <strong>Rapport</strong>, et <strong>Prévision</strong> ont beaucoup d’offres mais peu de brevets, reflétant des compétences classiquement demandées dans des offres d’emplois. À l’inverse, des compétences comme Base de données, Intelligence artificielle, Programmation, et Python présentent davantage de brevets que d’offres, témoignant de leur importance dans des secteurs technologiques de pointe.</p>
+<p><strong>Les compétences informatiques</strong> (ex. : C++, Git, SQL,Python, Programmation) sont étroitement liées à l’innovation, avec un grand nombre de brevets déposés par les entreprises demandant ce type de compétences dans leurs offres d’emplois. Les compétences d’équipe (Collaboration, Communication, Gestion de projets) et personnelles (Rigueur, Autonomie, Créativité, Proactif) se retrouve sur l’ensemble du graphique car nécessaire et presque primordial dans tous les domaines. Enfin, les compétences en statistiques (R Studio, Nettoyage de données, Statistique, database) se révèlent particulièrement représentées dans les dépôts de brevets, renforçant leur lien avec les activités de recherche et développement.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

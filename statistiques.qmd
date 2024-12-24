@@ -1,0 +1,368 @@
+---
+title: "Statistiques descriptives"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Cette page présente les statistiques descriptives de la base de données
+`base_brevets` et `base_emp`.
+
+# 1. Base de données `base_brevets` :
+
+### 1.1 Variables numériques pour les brevets
+
+```{r, include = FALSE, echo = FALSE}
+# Charger les bibliothèques nécessaires
+library(dplyr)
+library(knitr)
+
+base_brevets <- read.csv("base_brevets.csv", stringsAsFactors = FALSE)
+```
+
+```{r, echo = FALSE}
+
+# Calcul des statistiques pour la variable numérique `n_patents`
+stats_n_patents <- base_brevets %>%
+  summarise(
+    min = min(n_patents, na.rm = TRUE),
+    median = median(n_patents, na.rm = TRUE),
+    maximum = max(n_patents, na.rm = TRUE),
+    moyenne = mean(n_patents, na.rm = TRUE),
+    `Écart-type`= sd(n_patents, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(n_patents))
+  )
+```
+
+### Statistiques sur le nombre de brevets déposé (variable `n_patents`) :
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats_n_patents
+```
+
+**Analyse :** <br> - Le nombre de brevets varie entre 1 et 10 051,
+indiquant que certaines firmes ont une activité très limitée tandis que
+d'autres dominent largement le dépôt de brevets.<br> - La médiane de 4
+montre que la moitié des firmes déposent très peu de brevets, ce qui
+peut suggérer un déséquilibre important dans l'activité
+d'innovation.<br> - La moyenne (26,27) est significativement plus basse
+que la valeur maximale, confirmant une asymétrie due à des firmes
+"leaders".<br> - De même avec l'écart-type élevé (232,39).<br>
+
+### 1.2 Variables chaine de caractères pour les brevets
+
+#### 1.2.1 Top 5 firmes par nombre de brevets :
+
+```{r, echo = FALSE}
+# Top 5 firmes par nombre de brevets
+top_firm_name <- base_brevets %>%
+  group_by(firm_name) %>%
+  summarise(total_patents = sum(n_patents, na.rm = TRUE)) %>%
+  arrange(desc(total_patents)) %>%
+  slice_head(n = 5)
+```
+
+```{r, echo = FALSE}
+kable(top_firm_name, caption = "Top 5 firmes par nombre de brevets")
+```
+
+**Analyse :**<br> - Les cinq premières firmes, notamment le Commissariat
+à l’Énergie Atomique (10 051 brevets), dominent largement en termes de
+dépôts, indiquant une spécialisation dans la recherche publique et les
+grandes industries.<br> - Cette concentration de brevets suggère que ces
+firmes disposent de ressources significatives pour la R&D et qu’elles
+ont un rôle important dans l’innovation.<br>
+
+#### 1.2.2 Top 5 descriptions IPC par nombre de brevets :
+
+```{r, echo = FALSE}
+# Top 5 descriptions IPC par nombre de brevets
+top_ipc_desc <- base_brevets %>%
+  group_by(ipc_main_desc) %>%
+  summarise(total_patents = sum(n_patents, na.rm = TRUE)) %>%
+  arrange(desc(total_patents)) %>%
+  slice_head(n = 5)
+```
+
+```{r, echo = FALSE}
+kable(top_ipc_desc, caption = "Top 5 descriptions principales IPC")
+```
+
+**Analyse :**<br> - Les domaines médicaux et pharmaceutiques dominent
+les brevets avec 65 654 dépôts (soit environ trois fois plus que le
+2eme), reflétant leur importance dans l'innovation technologique et leur
+impact sociétal.<br> - Les semi-conducteurs et les réseaux sans fil
+(respectivement 22 317 et 14 499 brevets) soulignent le poids des
+technologies numériques dans l'économie moderne.<br> - Les autres
+catégories montrent une diversification des secteurs d'innovation, mais
+avec des volumes bien moindres.<br>
+
+#### 1.2.3 Top 5 villes par nombre de brevets :
+
+```{r, echo = FALSE}
+# Top 5 villes par nombre de brevets
+top_addr_city <- base_brevets %>%
+  group_by(addr_city_main) %>%
+  summarise(total_patents = sum(n_patents, na.rm = TRUE)) %>%
+  arrange(desc(total_patents)) %>%
+  slice_head(n = 5)
+
+```
+
+```{r, echo = FALSE}
+kable(top_addr_city, caption = "Top 5 villes par nombre de brevets")
+```
+
+**Analyse :**<br> - Paris, avec 101 960 brevets, domine très largement,
+ce qui reflète la centralisation économique et technologique en
+Île-de-France.<br> - Les autres villes, comme Boulogne-Billancourt et
+Courbevoie, jouent un rôle secondaire mais restent significatives,
+probablement grâce à leur proximité avec la capitale et à des sièges de
+grandes entreprises.<br>
+
+#### 1.2.4 Top 5 départements par nombre de brevets :
+
+```{r, echo = FALSE}
+# Top 5 départements par nombre de brevets
+top_addr_dept <- base_brevets %>%
+  group_by(addr_dept_main) %>%
+  summarise(total_patents = sum(n_patents, na.rm = TRUE)) %>%
+  arrange(desc(total_patents)) %>%
+  slice_head(n = 5)
+```
+
+```{r, echo = FALSE}
+kable(top_addr_dept, caption = "Top 5 départements par nombre de brevets")
+```
+
+**Analyse :**<br> - Les départements 75 (Paris) et 92 (Hauts-de-Seine)
+concentrent à eux seuls l’essentiel des brevets, confirmant leur rôle
+stratégique dans l’innovation.<br> - Les autres départements, bien
+qu’importants, restent bien plus faible que les 2 premiers (le 3eme est
+4 fois plus faible que le 2eme), confirmant cette centralisation
+économique et technologique cité précédement.<br>
+
+# 2. Base de données `base_emp` :
+
+### 2.1 Variables numériques pour les offres d'emploie
+
+```{r, echo = FALSE}
+base_emp <- read.csv("base_emp.csv", stringsAsFactors = FALSE)
+base_emp <- base_emp %>% select(-X)
+```
+
+```{r, echo = FALSE}
+
+# Calcul des statistiques pour la variable numérique `n_offres`
+stats_n_offres <- base_emp[-1,] %>%
+  summarise(
+    min = min(n_offres, na.rm = TRUE),
+    median = median(n_offres, na.rm = TRUE),
+    maximum = max(n_offres, na.rm = TRUE),
+    moyenne = mean(n_offres, na.rm = TRUE),
+    `Écart-type`= sd(n_offres, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(n_offres))
+  )
+```
+
+#### 2.1.1 Statistiques sur le nombre d'offres (variable `n_offres`) :
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats_n_offres
+```
+
+**Analyse :**<br> - Le nombre d’offres varie de 1 à 67, montrant que
+certaines firmes recrutent massivement tandis que la majorité ne publie
+que quelques offres.<br> - Une médiane de 1 et une moyenne de 3.89
+confirment que le marché des offres est dominé par des petites
+structures ou des besoins très spécifiques, avec des cas isolés de très
+gros recruteurs.<br> - L'écart-type assez faible (7.74) reflète
+effectivement une distribution fortement déséquilibrée.<br>
+
+```{r, echo = FALSE}
+# Calcul des statistiques pour la variable numérique `avg_wage`
+stats_avg_wage <- base_emp %>%
+  summarise(
+    min = min(avg_wage, na.rm = TRUE),
+    median = median(avg_wage, na.rm = TRUE),
+    maximum = max(avg_wage, na.rm = TRUE),
+    moyenne = mean(avg_wage, na.rm = TRUE),
+    `Écart-type`= sd(avg_wage, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(avg_wage))
+  )
+```
+
+#### 2.1.2 Statistiques sur le salaire moyen (variable `avg_wage`) :
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats_avg_wage
+```
+
+**Analyse :**<br> - Les salaires moyens varient considérablement, de 9
+000 à 600 000 euros, avec une médiane à 45 000.<br> - La moyenne (59
+359,57) dépasse la médiane car elle est influencée par des salaires
+exceptionnellement élevés.<br> - Cet écart peut indiquer soit une
+concentration de postes très rémunérateurs dans des secteurs
+spécifiques, soit des anomalies dans les données (surement une erreur de
+"la relève" qui aurait mis 50K par mois au lieu de 50K par an).<br>
+
+### 2.2 Variables chaînes de caractères
+
+#### 2.2.1 Top 5 firmes ayant le plus haut salaire moyen
+
+```{r, echo = FALSE}
+top_firm_salary <- base_emp %>%
+  filter(!is.na(firm_name) & !is.na(avg_wage)) %>%
+  group_by(firm_name) %>%                                  # Grouper par nom de l'entreprise
+  summarise(avg_salary = mean(avg_wage, na.rm = TRUE)) %>% # Calculer le salaire moyen par entreprise
+  arrange(desc(avg_salary)) %>%                            # Trier par salaire moyen décroissant
+  slice_head(n = 5)  
+```
+
+```{r, echo = FALSE}
+kable(top_firm_salary, caption = "Top 5 firmes avec les salaires moyen les plus élevés")
+```
+
+**Analyse :**<br> - La firme "la relève", avec un salaire moyen de 600
+000, semble être une exception ou contenir des données erronées.<br> -
+Les autres firmes dans le top 5 offrent des salaires significativement
+élevés (200 000+), suggérant des postes hautement qualifiés ou très
+spécifiques dans leur domaine.<br>
+
+#### 2.2.2 Top 5 secteur ayant le plus haut salaire moyen :
+
+```{r, echo = FALSE}
+top_sector_salary <- base_emp %>%
+  filter(!is.na(sector_main) & !is.na(avg_wage)) %>% 
+  group_by(sector_main) %>%                              # Grouper par compétence principale
+  summarise(avg_salary = mean(avg_wage, na.rm = TRUE)) %>% # Calculer le salaire moyen par compétence
+  arrange(desc(avg_salary)) %>%                           # Trier par salaire moyen décroissant
+  slice_head(n = 5)    
+```
+
+```{r, echo = FALSE}
+kable(top_sector_salary, caption = "Top 5 compétences avec les salaires moyen les plus élevés")
+```
+
+**Analyse :**<br> - Ces secteurs figurent parmi les mieux rémunérés,
+probablement en raison des compétences techniques et/ou spécialisées
+requises.<br>
+
+#### 2.2.3 Top 5 département ayant le plus haut salaire moyen :
+
+```{r, echo = FALSE}
+top_departments_salary <- base_emp %>%
+  filter(!is.na(addr_dept_main) & !is.na(avg_wage)) %>%
+  group_by(addr_dept_main) %>%                              # Grouper par département
+  summarise(avg_salary = mean(avg_wage, na.rm = TRUE)) %>%  # Calculer le salaire moyen par département
+  arrange(desc(avg_salary)) %>%                            # Trier par salaire moyen décroissant
+  slice_head(n = 5) 
+```
+
+```{r, echo = FALSE}
+kable(top_departments_salary, caption = "Top 5 departements avec les salaires moyen les plus élevés")
+```
+
+**Analyse :**<br> - Le département 79 ( avec 125 750 euros) affiche
+étonnamment le salaire moyen le plus élevé.<br> - Tant que les
+départements 75, 78 et 92 (autour de Paris) montrent des salaires
+compétitifs, confirmant les analyses faites précedement.<br>
+
+# 3. Base de données `base_emp_inno` :
+
+```{r, echo = FALSE}
+base_emp_inno <- read.csv("base_emp_inno.csv", stringsAsFactors = FALSE)
+
+base_emp_inno <- base_emp_inno %>% select(-ipc_main_desc)
+```
+
+### 3.1 Variables numériques pour la base de données `base_emp_inno`
+
+#### 3.1.1 Statistiques sur le nombre de brevets déposés (variable `n_patents`) :
+
+```{r, echo = FALSE}
+# Calcul des statistiques pour la variable numérique `n_patents`
+stats2_n_patents <- base_emp_inno %>%
+  summarise(
+    min = min(n_patents, na.rm = TRUE),
+    median = median(n_patents, na.rm = TRUE),
+    maximum = max(n_patents, na.rm = TRUE),
+    moyenne = mean(n_patents, na.rm = TRUE),
+    `Écart-type`= sd(n_patents, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(n_patents))
+  )
+```
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats2_n_patents
+```
+
+**Analyse :**<br> - Les brevets déposés varient de 1 à 1 638, avec une
+médiane de 7 brevets, confirme que la moitié des firmes déposent très
+peu de brevets.<br> - La moyenne (92,19) et l’écart-type élevé (277,99)
+confirment également qu’une minorité des entreprises dominent en
+innovation.<br> - Cela reflète probablement la concentration
+d’innovation dans des secteurs spécifiques.<br>
+
+#### 3.1.2 Statistiques sur le nombre d'offres d'emploies (variable `n_offres`) :
+
+```{r, echo = FALSE}
+# Calcul des statistiques pour la variable numérique `n_offres`
+stats2_n_offres <- base_emp_inno %>%
+  summarise(
+    min = min(n_offres, na.rm = TRUE),
+    median = median(n_offres, na.rm = TRUE),
+    maximum = max(n_offres, na.rm = TRUE),
+    moyenne = mean(n_offres, na.rm = TRUE),
+    `Écart-type`= sd(n_offres, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(n_offres))
+  )
+```
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats2_n_offres
+```
+
+**Analyse :**<br> - Les offres d’emploi innovantes varient de 1 à 44,
+avec une médiane de 2, montrant que ces postes restent assez rares
+malgrés quelques entreprises qui recrutent beaucoup.<br> - La moyenne
+(3,95) indique que ces entreprises, bien qu’innovantes, ont des besoins
+de recrutement relativement faible.<br> - Cela peut indiquer un fort
+niveau d’expertise recherché ou une spécialisation limitant le nombre
+d’embauches.<br>
+
+#### 3.1.3 Statistiques sur le nombre d'offres d'emploies (variable `avg_wage`) :
+
+```{r, echo = FALSE}
+# Calcul des statistiques pour la variable numérique `avg_wage`
+stats2_avg_wage <- base_emp_inno %>%
+  summarise(
+    min = min(avg_wage, na.rm = TRUE),
+    median = median(avg_wage, na.rm = TRUE),
+    maximum = max(avg_wage, na.rm = TRUE),
+    moyenne = mean(avg_wage, na.rm = TRUE),
+    `Écart-type`= sd(avg_wage, na.rm = TRUE),
+    `Valeurs manquantes`= sum(is.na(avg_wage))
+  )
+```
+
+```{r, echo = FALSE}
+# Affichage des statistiques
+stats2_avg_wage
+```
+
+**Analyse :**<br> - Les salaires moyens dans l’innovation (10 800 à 44
+000 euros) sont concentrés dans des fourchettes plus basses que la base
+générale (base_emp), avec une médiane de 35 140 euros.<br> - Cela
+reflète des postes techniques ou intermédiaires plutôt que des postes de
+direction ou alors un manque de données sur les salaires moyens dans
+l'innovation (à cause de la majorité des offres d'emploies qui
+n'indiquent pas le salaire).<br>
+
+------------------------------------------------------------------------
